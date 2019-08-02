@@ -1,33 +1,53 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.app {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 100vh;
+  overflow: hidden;
+  grid-gap: 6px;
+  background-color: #bbb;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app > div {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background-color: #fff;
 }
 
-.App-link {
-  color: #61dafb;
+.editor {
+  grid-column: 1;
+  grid-row: 1/3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.editor svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.svg-preview {
+  grid-column: 2;
+  grid-row: 1;
+}
+.svg-preview svg {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.png-preview {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.png-preview canvas {
+  max-height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.editor rect:hover {
+  stroke: #bbb;
 }
