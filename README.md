@@ -16,3 +16,4 @@ Then start the application using
 - Make it pretty
 
 ### Deploy
+```npm run deploy```
