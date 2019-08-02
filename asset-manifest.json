@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/logo-creator/static/css/main.7d55c055.chunk.css",
+    "main.js": "/logo-creator/static/js/main.3cd36b19.chunk.js",
+    "main.js.map": "/logo-creator/static/js/main.3cd36b19.chunk.js.map",
+    "runtime~main.js": "/logo-creator/static/js/runtime~main.e17fe58b.js",
+    "runtime~main.js.map": "/logo-creator/static/js/runtime~main.e17fe58b.js.map",
+    "static/js/2.5286435d.chunk.js": "/logo-creator/static/js/2.5286435d.chunk.js",
+    "static/js/2.5286435d.chunk.js.map": "/logo-creator/static/js/2.5286435d.chunk.js.map",
+    "index.html": "/logo-creator/index.html",
+    "precache-manifest.ed00145b717f071fc696d1fe4fd94b8e.js": "/logo-creator/precache-manifest.ed00145b717f071fc696d1fe4fd94b8e.js",
+    "service-worker.js": "/logo-creator/service-worker.js",
+    "static/css/main.7d55c055.chunk.css.map": "/logo-creator/static/css/main.7d55c055.chunk.css.map"
+  }
+}
