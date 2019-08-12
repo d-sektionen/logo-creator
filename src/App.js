@@ -16,22 +16,46 @@ const randomColor = () => {
   return dColors[key];
 };
 
+const createGrid = (height, width, oldGrid = null) => {
+  let grid = [...Array(height).fill([...Array(width)].fill(null))];
+
+  // Rows need to be remade as all rows are a refrence to the same array
+  // with the array.fill method.
+  grid = grid.map(row => [...row]);
+  if (oldGrid) {
+    grid.forEach((row, y) => {
+      if (y < oldGrid.length)
+        row.forEach((cell, x) => {
+          if (x < oldGrid[y].length && oldGrid[y][x] !== null)
+            grid[y][x] = oldGrid[y][x];
+        });
+    });
+  }
+
+  return grid;
+};
+
 function App() {
-  const [width, setWidth] = useState(10);
-  const [height, setHeight] = useState(10);
+  const [width, setWidth] = useState(12);
+  const [height, setHeight] = useState(12);
+  const [pngScale, setPngScale] = useState(5);
   const [pngWidth, setPngWidth] = useState(width * 50);
   const [pngHeight, setPngHeight] = useState(height * 50);
-  const [grid, setGrid] = useState([
-    ...Array(height).fill([...Array(width)].fill(null))
-  ]);
+  const [grid, setGrid] = useState(createGrid(width, height));
   const [svg, setSvg] = useState(null);
   const [ctx, setCtx] = useState(null);
+
+  useEffect(() => {
+    setPngHeight((height * 10 + height - 1) * pngScale);
+    setPngWidth((width * 10 + width - 1) * pngScale);
+  }, [width, height, pngScale]);
 
   useEffect(() => {
     if (!ctx) return;
     var img = new Image();
     img.onload = () => {
       ctx.clearRect(0, 0, pngWidth, pngHeight);
+      ctx.imageSmoothingEnabled = false;
       ctx.drawImage(img, 0, 0, pngWidth, pngHeight);
     };
     img.src = svg;
@@ -103,6 +127,34 @@ function App() {
         <div>
           <h2>Editor</h2>
           <p>Hold shift to remove square.</p>
+          <label>
+            Width: ({width})
+            <input
+              type="range"
+              min={1}
+              max={100}
+              onChange={e => {
+                const value = Number(e.target.value);
+                setGrid(createGrid(height, value, grid));
+                setWidth(value);
+              }}
+              value={width}
+            />
+          </label>
+          <label>
+            Height: ({height})
+            <input
+              type="range"
+              min={1}
+              max={100}
+              onChange={e => {
+                const value = Number(e.target.value);
+                setGrid(createGrid(value, width, grid));
+                setHeight(value);
+              }}
+              value={height}
+            />
+          </label>
         </div>
         <div>
           <Logo placeholders />
@@ -127,6 +179,16 @@ function App() {
         <div>
           <h2>PNG-preview</h2>
           <p>Right click to download.</p>
+          <label>
+            PNG scale: ({pngScale}, current size is {pngWidth}x{pngHeight})
+            <input
+              type="range"
+              min={1}
+              max={20}
+              onChange={e => setPngScale(Number(e.target.value))}
+              value={pngScale}
+            />
+          </label>
         </div>
         <div>
           <canvas
